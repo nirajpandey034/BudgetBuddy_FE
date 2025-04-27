@@ -16,7 +16,7 @@ export const metadata = {
   title: 'Budget Buddy',
   description: 'Track your expenses and income with ease',
   icons: {
-    icon: '/logo.jpg',
+    icon: '/logo.png',
   },
 };
 
@@ -38,7 +38,7 @@ export default function RootLayout({ children }) {
         >
           {/* Logo */}
           <Image
-            src="/logo.jpg" // Place your logo inside public/logo.png
+            src="/logo.png" // Place your logo inside public/logo.png
             alt="Budget Buddy Logo"
             width={40}
             height={40}

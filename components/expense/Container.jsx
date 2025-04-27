@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { Tab, Tabs, Box, Typography } from '@mui/material';
+import { Tab, Tabs, Box, Typography, Button } from '@mui/material';
 import ExpenseForm from './ExpenseForm'; // your existing form
 import { fetchCategories } from '../../services/categoryService';
 import { addExpense } from '../../services/expenseService';
@@ -33,6 +33,18 @@ export default function Container() {
     }
   }, []);
 
+  const handleLogout = () => {
+    // Clear all cookies
+    document.cookie.split(';').forEach((c) => {
+      document.cookie = c
+        .replace(/^ +/, '')
+        .replace(/=.*/, `=;expires=${new Date().toUTCString()};path=/`);
+    });
+
+    // Redirect to login page
+    window.location.href = '/user/login';
+  };
+
   return (
     <Box sx={{ width: '100%', mt: 2 }}>
       <Tabs
@@ -65,6 +77,29 @@ export default function Container() {
             <MonthlyTabs />
           </Typography>
         )}
+      </Box>
+
+      {/* Logout Button */}
+      <Box sx={{ mt: 3, display: 'flex', justifyContent: 'center' }}>
+        <Button
+          variant="outlined"
+          color="secondary"
+          onClick={handleLogout}
+          sx={{
+            padding: '10px 20px',
+            fontSize: '16px',
+            fontWeight: 'bold',
+            borderRadius: '8px',
+            textTransform: 'none',
+            boxShadow: 3,
+            '&:hover': {
+              backgroundColor: '#ff3d00',
+              color: '#fff',
+            },
+          }}
+        >
+          Logout
+        </Button>
       </Box>
     </Box>
   );
