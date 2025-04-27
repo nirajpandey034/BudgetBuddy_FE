@@ -1,13 +1,11 @@
 import axios from 'axios';
 import getFormattedDate from '../util/Date'; // Assuming this formats the date
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL.endsWith('/')
-  ? process.env.NEXT_PUBLIC_API_URL
-  : process.env.NEXT_PUBLIC_API_URL + '/';
+const API_URL = process.env.NEXT_PUBLIC_API_URL + '/';
 
-const API_URL_LOCAL = process.env.NEXT_PUBLIC_API_URL_LOCAL.endsWith('/')
-  ? process.env.NEXT_PUBLIC_API_URL_LOCAL
-  : process.env.NEXT_PUBLIC_API_URL_LOCAL + '/';
+// const API_URL_LOCAL = process.env.NEXT_PUBLIC_API_URL_LOCAL.endsWith('/')
+//   ? process.env.NEXT_PUBLIC_API_URL_LOCAL
+//   : process.env.NEXT_PUBLIC_API_URL_LOCAL + '/';
 
 const addExpense = async (expenseData) => {
   const tokenMatch = document.cookie.match(/BB_AUTH_TOKEN=([^;]+)/);
@@ -29,7 +27,7 @@ const addExpense = async (expenseData) => {
 
   try {
     const response = await axios.post(
-      `${API_URL_LOCAL}expense/add/`,
+      `${API_URL}expense/add/`,
       expenseDataWithTimestamp,
       {
         withCredentials: true,
@@ -63,7 +61,7 @@ const listExpenses = async (request) => {
 
   try {
     const response = await axios.get(
-      `${API_URL_LOCAL}expense/list?userId=${userId}&month=${
+      `${API_URL}expense/list?userId=${userId}&month=${
         request.month + 1
       }&year=${request.year}`,
       {

@@ -1,12 +1,10 @@
 import axios from 'axios';
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL.endsWith('/')
-  ? process.env.NEXT_PUBLIC_API_URL
-  : process.env.NEXT_PUBLIC_API_URL + '/';
+const API_URL = process.env.NEXT_PUBLIC_API_URL + '/';
 
-const API_URL_LOCAL = process.env.NEXT_PUBLIC_API_URL_LOCAL.endsWith('/')
-  ? process.env.NEXT_PUBLIC_API_URL_LOCAL
-  : process.env.NEXT_PUBLIC_API_URL_LOCAL + '/';
+// const API_URL_LOCAL = process.env.NEXT_PUBLIC_API_URL_LOCAL.endsWith('/')
+//   ? process.env.NEXT_PUBLIC_API_URL_LOCAL
+//   : process.env.NEXT_PUBLIC_API_URL_LOCAL + '/';
 
 const registerUser = async (email, password, name, profession) => {
   try {
@@ -28,7 +26,7 @@ const registerUser = async (email, password, name, profession) => {
 const loginUser = async (email, password) => {
   try {
     const response = await axios.post(
-      `${API_URL_LOCAL}user/login`,
+      `${API_URL}user/login`,
       { email, password },
       { withCredentials: true }
     );

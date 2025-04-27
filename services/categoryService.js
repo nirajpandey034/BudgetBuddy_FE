@@ -1,12 +1,10 @@
 import axios from 'axios';
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL.endsWith('/')
-  ? process.env.NEXT_PUBLIC_API_URL
-  : process.env.NEXT_PUBLIC_API_URL + '/';
+const API_URL = process.env.NEXT_PUBLIC_API_URL + '/';
 
-const API_URL_LOCAL = process.env.NEXT_PUBLIC_API_URL_LOCAL.endsWith('/')
-  ? process.env.NEXT_PUBLIC_API_URL_LOCAL
-  : process.env.NEXT_PUBLIC_API_URL_LOCAL + '/';
+// const API_URL_LOCAL = process.env.NEXT_PUBLIC_API_URL_LOCAL.endsWith('/')
+//   ? process.env.NEXT_PUBLIC_API_URL_LOCAL
+//   : process.env.NEXT_PUBLIC_API_URL_LOCAL + '/';
 
 const fetchCategories = async () => {
   try {
@@ -18,7 +16,7 @@ const fetchCategories = async () => {
     }
     const token = tokenMatch[1];
 
-    const response = await axios.get(`${API_URL_LOCAL}category/`, {
+    const response = await axios.get(`${API_URL}category/`, {
       withCredentials: true,
       headers: {
         Authorization: `Bearer ${token}`,
