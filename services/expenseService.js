@@ -12,6 +12,12 @@ const addExpense = async (expenseData) => {
   const userIdMatch = document.cookie.match(/BB_USER_ID=([^;]+)/);
 
   if (!tokenMatch || !userIdMatch) {
+    document.cookie.split(';').forEach((c) => {
+      document.cookie = c
+        .replace(/^ +/, '')
+        .replace(/=.*/, `=;expires=${new Date().toUTCString()};path=/`);
+    });
+
     window.location.href = '/user/login';
     return;
   }
@@ -39,6 +45,12 @@ const addExpense = async (expenseData) => {
     return response.data;
   } catch (error) {
     if (error.response && error.response.status === 401) {
+      document.cookie.split(';').forEach((c) => {
+        document.cookie = c
+          .replace(/^ +/, '')
+          .replace(/=.*/, `=;expires=${new Date().toUTCString()};path=/`);
+      });
+
       window.location.href = '/user/login';
     } else {
       console.error('Error adding expense:', error);
@@ -52,6 +64,12 @@ const listExpenses = async (request) => {
   const userIdMatch = document.cookie.match(/BB_USER_ID=([^;]+)/);
 
   if (!tokenMatch || !userIdMatch) {
+    document.cookie.split(';').forEach((c) => {
+      document.cookie = c
+        .replace(/^ +/, '')
+        .replace(/=.*/, `=;expires=${new Date().toUTCString()};path=/`);
+    });
+
     window.location.href = '/user/login';
     return;
   }
@@ -74,6 +92,12 @@ const listExpenses = async (request) => {
     return response.data;
   } catch (error) {
     if (error.response && error.response.status === 401) {
+      document.cookie.split(';').forEach((c) => {
+        document.cookie = c
+          .replace(/^ +/, '')
+          .replace(/=.*/, `=;expires=${new Date().toUTCString()};path=/`);
+      });
+
       window.location.href = '/user/login';
     } else {
       throw error;

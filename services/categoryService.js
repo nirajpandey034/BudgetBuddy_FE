@@ -10,6 +10,12 @@ const fetchCategories = async () => {
   try {
     const tokenMatch = document.cookie.match(/BB_AUTH_TOKEN=([^;]+)/);
     if (!tokenMatch) {
+      document.cookie.split(';').forEach((c) => {
+        document.cookie = c
+          .replace(/^ +/, '')
+          .replace(/=.*/, `=;expires=${new Date().toUTCString()};path=/`);
+      });
+
       // No token found in cookies
       window.location.href = '/user/login';
       return;
@@ -26,6 +32,12 @@ const fetchCategories = async () => {
     return response.data;
   } catch (error) {
     console.error('Error fetching categories:', error);
+    document.cookie.split(';').forEach((c) => {
+      document.cookie = c
+        .replace(/^ +/, '')
+        .replace(/=.*/, `=;expires=${new Date().toUTCString()};path=/`);
+    });
+
     // Redirect to login on any error
     window.location.href = '/user/login';
     throw error; // optional: rethrow if caller needs to handle it too
