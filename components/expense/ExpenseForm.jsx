@@ -82,6 +82,7 @@ const ExpenseForm = ({ categories, loading, onSubmit }) => {
         },
         resetForm
       );
+      localStorage.clear();
     },
     [totalIncome, expenses, deficit, onSubmit]
   );
