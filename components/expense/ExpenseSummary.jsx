@@ -10,10 +10,15 @@ import {
   Stack,
 } from '@mui/material';
 
-const ExpenseSummary = ({ expenseData }) => {
+const ExpenseSummary = ({ expenseData, setActiveTab }) => {
   const { expenseCategories, expenseTimestamp, totalIncome, deficit } =
     expenseData;
 
+  const saveDataForEdit = () => {
+    // Logic to save data for editing
+    localStorage.setItem('BB_EXPENSE_DATA', JSON.stringify(expenseData));
+    setActiveTab(0);
+  };
   return (
     <Card
       sx={{
@@ -77,8 +82,9 @@ const ExpenseSummary = ({ expenseData }) => {
                   <Box
                     sx={{
                       display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'space-between',
+                      flexDirection: 'column',
+                      alignItems: 'flex-start',
+                      justifyContent: 'flex-start',
                       p: 1,
                       borderRadius: 2,
                       bgcolor: 'grey.100',
@@ -93,6 +99,30 @@ const ExpenseSummary = ({ expenseData }) => {
               )
             )}
           </Grid>
+
+          <Box
+            sx={{
+              display: 'flex',
+              justifyContent: 'flex-end',
+              mt: 2,
+            }}
+          >
+            <button
+              type="button"
+              onClick={saveDataForEdit}
+              style={{
+                backgroundColor: '#1976d2',
+                color: '#ffffff',
+                padding: '10px 20px',
+                border: 'none',
+                borderRadius: '5px',
+                cursor: 'pointer',
+                fontSize: '14px',
+              }}
+            >
+              Edit
+            </button>
+          </Box>
         </Grid>
       </Grid>
     </Card>

@@ -8,10 +8,10 @@ import {
   Select,
   InputLabel,
 } from '@mui/material';
-import ExpenseCard from './ExpenseSummary';
+import ExpenseSummary from './ExpenseSummary';
 import { listExpenses } from '../../services/expenseService';
 
-const MonthlyTabs = () => {
+const MonthlyTabs = ({ setActiveTab }) => {
   const currentYear = new Date().getFullYear();
   const years = useMemo(
     () => Array.from({ length: 10 }, (_, index) => currentYear - index),
@@ -91,7 +91,12 @@ const MonthlyTabs = () => {
         ))}
       </Tabs>
       {error && <Box sx={{ color: 'red', mt: 2 }}>{error}</Box>}
-      {!error && expenseData && <ExpenseCard expenseData={expenseData[0]} />}
+      {!error && expenseData && (
+        <ExpenseSummary
+          expenseData={expenseData[0]}
+          setActiveTab={setActiveTab}
+        />
+      )}
     </Box>
   );
 };

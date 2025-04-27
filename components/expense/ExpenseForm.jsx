@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useCallback } from 'react';
+import React, { useState, useMemo, useCallback, useEffect } from 'react';
 import {
   TextField,
   Button,
@@ -40,6 +40,20 @@ const ExpenseForm = ({ categories, loading, onSubmit }) => {
       delete newExpenses[category];
       return newExpenses;
     });
+  }, []);
+
+  useEffect(() => {
+    const storedData = localStorage.getItem('BB_EXPENSE_DATA');
+    if (storedData) {
+      const {
+        totalIncome: storedTotalIncome,
+        expenseCategories: storedExpenses,
+      } = JSON.parse(storedData);
+
+      setTotalIncome(storedTotalIncome);
+      setExpenses(storedExpenses);
+      setSelectedCategories(Object.keys(storedExpenses));
+    }
   }, []);
 
   const totalExpenses = useMemo(() => {

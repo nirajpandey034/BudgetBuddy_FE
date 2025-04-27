@@ -74,7 +74,7 @@ export default function Container() {
           <Typography color="textSecondary">
             {/* Your monthly-view component goes here */}
             Monthly expenses will be displayed here.
-            <MonthlyTabs />
+            <MonthlyTabs setActiveTab={setActiveTab} />
           </Typography>
         )}
       </Box>
