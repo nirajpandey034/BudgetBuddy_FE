@@ -115,17 +115,20 @@ export default function SignupCard() {
             disabled={loading}
           >
             {loading ? (
-              <CircularProgress
-                size={24}
-                color="inherit"
-                style={{
-                  position: 'absolute',
-                  top: '50%',
-                  left: '50%',
-                  marginTop: -12,
-                  marginLeft: -12,
-                }}
-              />
+              <>
+                <CircularProgress
+                  size={24}
+                  color="inherit"
+                  style={{
+                    position: 'absolute',
+                    top: '50%',
+                    left: '50%',
+                    marginTop: -12,
+                    marginLeft: -12,
+                  }}
+                />
+                <span style={{ visibility: 'hidden' }}>Loading...</span>
+              </>
             ) : (
               'Register'
             )}

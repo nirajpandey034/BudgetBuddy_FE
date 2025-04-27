@@ -51,6 +51,7 @@ const MonthlyTabs = () => {
 
   const fetchExpenses = async () => {
     try {
+      setError('Loading...');
       const data = await listExpenses({
         month: selectedMonth,
         year: selectedYear,
@@ -63,8 +64,6 @@ const MonthlyTabs = () => {
   };
 
   useEffect(() => {
-    console.log(selectedMonth, selectedYear);
-
     fetchExpenses();
   }, [selectedMonth, selectedYear]);
 
